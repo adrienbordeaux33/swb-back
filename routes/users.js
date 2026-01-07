@@ -1,15 +1,9 @@
-var express = require("express");
-var router = express.Router();
+require("../models/connexion");
+const User = require("../models/users");
 
-// Route pour récupérer tous les utilisateurs
-router.get("/", (req, res) => {
-  res.json({ message: "Liste des utilisateurs" });
+const newUser = new User({
+  username: "admin",
+  email: "admin@example.com",
+  password: "admin123",
 });
-
-// Route pour récupérer un utilisateur par ID
-router.get("/:id", (req, res) => {
-  const userId = req.params.id;
-  res.json({ message: `Utilisateur ${userId}` });
-});
-
-module.exports = router;
+newUser.save().then(() => console.log("Utilisateur admin créé"));
