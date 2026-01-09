@@ -1,9 +1,19 @@
 require("../models/connexion");
+const express = require("express");
+const router = express.Router();
 const User = require("../models/users");
 
-const newUser = new User({
-  username: "admin",
-  email: "admin@example.com",
-  password: "admin123",
+// Exemple de route GET
+router.get("/", async (req, res) => {
+  const users = await User.find();
+  res.json(users);
 });
-newUser.save().then(() => console.log("Utilisateur admin créé"));
+
+const newUser = new User({
+  username: "nom d'utilisateur",
+  email: "exemple@email.com",
+  password: "motdepasse",
+});
+newUser.save().then(() => console.log("Utilisateur créé"));
+
+module.exports = router;
